@@ -15,6 +15,9 @@
                         <img src="{{ $post->image_url }}" class='img'>
                     </div>
                     <div>
+                        @include('posts_favorite.favorite_button')
+                    </div>
+                    <div>
                         @if (Auth::id() == $post->user_id)
                             {{-- 投稿削除ボタンのフォーム --}}
                             {!! Form::open(['route' => ['posts.destroy', $post->id], 'method' => 'delete']) !!}
