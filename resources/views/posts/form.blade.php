@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <form action="/posts" method="post" enctype="multipart/form-data">
+        @csrf
+        <p>
+            <input type="file" name="datafile">
+        </p>
+        <p>
+            <input type="submit" value="投稿">
+        </p>
+    </form>
+</body>
+</html>

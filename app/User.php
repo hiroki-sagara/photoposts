@@ -9,6 +9,23 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     use Notifiable;
+    
+    /**
+     * このユーザが所有する投稿。（ Postモデルとの関係を定義）
+     */
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+    
+    /**
+     * このユーザに関係するモデルの件数をロードする。
+     */
+     
+    public function loadRelationshipCounts()
+    {
+        $this->loadCount('posts');
+    }
 
     /**
      * The attributes that are mass assignable.
