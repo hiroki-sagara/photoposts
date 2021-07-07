@@ -14,16 +14,18 @@
                         {{-- 投稿内容 --}}
                         <img src="{{ $post->image_url }}" class='img'>
                     </div>
-                    <div>
-                        @include('posts_favorite.favorite_button')
-                    </div>
-                    <div>
-                        @if (Auth::id() == $post->user_id)
-                            {{-- 投稿削除ボタンのフォーム --}}
-                            {!! Form::open(['route' => ['posts.destroy', $post->id], 'method' => 'delete']) !!}
-                                {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) !!}
-                            {!! Form::close() !!}
-                        @endif
+                    <div class='button'>
+                        <div>
+                            @include('posts_favorite.favorite_button')
+                        </div>
+                        <div>
+                            @if (Auth::id() == $post->user_id)
+                                {{-- 投稿削除ボタンのフォーム --}}
+                                {!! Form::open(['route' => ['posts.destroy', $post->id], 'method' => 'delete']) !!}
+                                    {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) !!}
+                                {!! Form::close() !!}
+                            @endif
+                        </div>
                     </div>
                 </div>
             </li>
