@@ -6,6 +6,12 @@
             <aside class="col-sm-4">
                 {{-- ユーザ情報 --}}
                 @include('users.card')
+                
+                {{ Form::open(['method'=>'get','route'=>['top.page']]) }}
+                {{ Form::select('category_id', $categories, null)}}
+                {{ Form::submit('絞り込む',['class'=>'btn btn-outline-danger']) }}
+                {{ Form::close() }}
+                
             </aside>
             <div class="col-sm-8">
                 {{-- 投稿フォーム --}}

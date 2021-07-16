@@ -10,14 +10,20 @@ use App\Category;
 
 class PostsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        
+        
         $data = [];
         if (\Auth::check()) { // 認証済みの場合
             // 認証済みユーザを取得
             $user = \Auth::user();
-            // ユーザの投稿の一覧を作成日時の降順で取得
-            $posts = $user->feed_posts()->orderBy('created_at', 'desc')->paginate(10);
+            
+            if (empty($request->category_id)) {
+                $posts = $user->feed_posts()->orderBy('created_at', 'desc')->paginate(10);
+            } else {
+                $posts = $user->feed_posts()->where('category_id', $request->category_id)->orderBy('created_at', 'desc')->paginate(10);
+            }
             
             $categories = Category::pluck('category', 'id');
             
