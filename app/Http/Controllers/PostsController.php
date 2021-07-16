@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Storage; // 追加
 
+use App\Category;
+
 class PostsController extends Controller
 {
     public function index()
@@ -16,13 +18,17 @@ class PostsController extends Controller
             $user = \Auth::user();
             // ユーザの投稿の一覧を作成日時の降順で取得
             $posts = $user->feed_posts()->orderBy('created_at', 'desc')->paginate(10);
-
+            
+            $categories = Category::pluck('category', 'id');
+            
             $data = [
                 'user' => $user,
                 'posts' => $posts,
+                'categories' => $categories,
             ];
+            
         }
-
+        
         // Welcomeビューでそれらを表示
         return view('welcome', $data);
     }
@@ -51,8 +57,10 @@ class PostsController extends Controller
         // 認証済みユーザ（閲覧者）の投稿として作成（リクエストされた値をもとに作成）
         $request->user()->posts()->create([
             'image_url' => $disk->url($fileName),
+            // category_id保存
+            'category_id' => $request->category_id,
         ]);
- 
+        
         return back();
     }
     

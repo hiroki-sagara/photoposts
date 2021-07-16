@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-    protected $fillable = ['image_url'];
+    protected $fillable = ['image_url', 'category_id'];
     
     /**
      * この投稿を所有するユーザ。（ Userモデルとの関係を定義）
@@ -16,8 +16,14 @@ class Post extends Model
         return $this->belongsTo(User::class);
     }
     
-    public function favorite_users() {
+    public function favorite_users() 
+    {
         return $this->belongsToMany(User::class, 'favorites', 'post_id', 'user_id')->withTimestamps();
+    }
+    
+    public function category() 
+    {
+        return $this->belongsTo(Category::class);
     }
     
 }

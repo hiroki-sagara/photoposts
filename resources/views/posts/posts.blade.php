@@ -13,6 +13,9 @@
                     <div>
                         {{-- 投稿内容 --}}
                         <img src="{{ $post->image_url }}" class='img'>
+                        <div>
+                            {{ $post->category_id }}
+                        </div>
                     </div>
                     <div class='button'>
                         <div>

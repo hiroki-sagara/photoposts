@@ -5,3 +5,7 @@
 .button {
     display: flex;
 }
+
+.submit {
+    margin-top: 15px;
+}

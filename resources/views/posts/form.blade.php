@@ -10,8 +10,14 @@
             <input type="file" name="datafile">
         </p>
         <p>
-            <input type="submit" value="投稿">
+            {{Form::select('category_id', $categories, 6)}}
         </p>
+        
+        <div class='submit'>
+            <p>
+                <input type="submit" value="投稿">
+            </p>
+        </div>
     </form>
 </body>
 </html>

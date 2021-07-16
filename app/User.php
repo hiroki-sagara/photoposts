@@ -105,7 +105,8 @@ class User extends Authenticatable
         return Post::whereIn('user_id', $userIds);
     }
     
-    public function favorites() {
+    public function favorites() 
+    {
         return $this->belongsToMany(Post::class, 'favorites', 'user_id', 'post_id')->withTimestamps();
     }
     
